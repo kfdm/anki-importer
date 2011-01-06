@@ -8,8 +8,7 @@ def format words
 		puts "#{words[0]}\t#{words[2]}\t#{words[1]}"
 	else
 		# Otherwise we have kanji
-		# We use <Word>[<Reading>] at the end to automatically add furigana
-		puts "#{words[0]}\t#{words[2]}\t#{words[0]}[#{words[1]}]"
+		puts "#{words[0]}\t#{words[2]}\t#{words[0]}"
 	end
 end
 
