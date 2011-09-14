@@ -1,23 +1,37 @@
 #!/usr/bin/env ruby
+$TAGS   = "tags: Import Kotoba #{Time::now().strftime('%Y-%m-%d')}"
+$SOURCE = File.expand_path '~/Downloads/Favorites.txt'
+$DEST   = File.dirname(__FILE__) + '/kotoba.output.txt'
 
-raise 'Missing Input File' if not ARGV[0]
+$input = File.new($SOURCE, "r")
+$output = File.new($DEST,'w')
 
-def format( words)
-	if words[0] == words[1] then
-		puts "#{words[0]}\t#{words[2]}\t#{words[1]}"
-	else
-		puts "#{words[0]}\t#{words[2]}\t#{words[0]}"
-	end
+# Kotoba lines are of the form
+# <DICT> <ID> <Word> <Reading> <Definition> <List>
+# So we want to take <Word> <Reading> <Definition>
+def format line
+	words = line.strip().split("\t")
+	expression = words[2]
+	meaning    = words[4]
+	reading    = words[3]
+	#puts "Original: #{line}"
+	#puts "Expression: #{expression}"
+	#puts "Meaning:    #{meaning}"
+	#puts "Reading:    #{reading}"
+	return "#{expression}\t#{meaning}\t#{reading}"
 end
 
-input = File.new(ARGV[0], "r")
-while(line = input.gets)
-	# Kotoba lines are of the form
-	# <DICT> <ID> <Word> <Reading> <Definition> <List>
-	# So we want to take <Word> <Reading> <Definition>
-	words = line.strip().split("\t").slice(2,3)
-	# Then we want to put it as <Word> <Meaning> <Reading> for Anki
-	format words
+def fputs line
+	puts line
+	$output << "#{line}\n"
 end
 
-input.close
+fputs $TAGS
+
+while(line = $input.gets)
+	words = format line
+	fputs words
+end
+
+$input.close
+$output.close
