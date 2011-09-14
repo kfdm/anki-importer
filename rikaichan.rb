@@ -1,25 +1,42 @@
 #!/usr/bin/env ruby
+$TAGS   = "tags: Import Rikaichan #{Time::now().strftime('%Y-%m-%d')}"
+$SOURCE = File.expand_path '~/Dropbox/Documents/rikaichan.txt'
+$DEST   = File.dirname(__FILE__) + '/rikaichan.output.txt'
 
-raise 'Missing Input File' if not ARGV[0]
+$input = File.new($SOURCE, "r")
+$output = File.new($DEST,'w')
 
-def format words
-	if words[0] == words[1] then
-		# If there are only 2 'words' then we only have hiragana
-		puts "#{words[0]}\t#{words[2]}\t#{words[1]}"
-	else
-		# Otherwise we have kanji
-		puts "#{words[0]}\t#{words[2]}\t#{words[0]}"
-	end
-end
-
-input = File.new(ARGV[0], "r")
-while(line = input.gets)
+# Rikaichan lines are of the form
+# <Expression> <Reading> <Meaning>
+def format line
 	words = line.strip().split("\t")
-	if words.length == 2 then
-		# Use word[0] twice for both <Word> and <Reading>
-		words = [words[0],words[0],words[1]]
+	if words.length == 2
+		expression = words[0]
+		meaning    = words[1]
+		reading    = words[0]
+	else
+		expression = words[0]
+		meaning    = words[2]
+		reading    = words[1]
 	end
-	format words
+	#puts "Original: #{line}"
+	#puts "Expression: #{expression}"
+	#puts "Meaning:    #{meaning}"
+	#puts "Reading:    #{reading}"
+	return "#{expression}\t#{meaning}\t#{reading}"
 end
 
-input.close
+def fputs line
+	puts line
+	$output << "#{line}\n"
+end
+
+fputs $TAGS
+
+while(line = $input.gets)
+	words = format line
+	fputs words
+end
+
+$input.close
+$output.close
