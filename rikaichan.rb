@@ -23,7 +23,7 @@ def format line
 	#puts "Expression: #{expression}"
 	#puts "Meaning:    #{meaning}"
 	#puts "Reading:    #{reading}"
-	return "#{expression}\t#{meaning}\t#{reading}"
+	return "#{expression}\t#{meaning}\t#{reading}\ty\ty"
 end
 
 def fputs line
