@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+# Copyright: 2013 Paul Traylor
+# These sources are released under the terms of the MIT license: see LICENSE
 $TAGS   = "tags: Import Rikaichan #{Time::now().strftime('%Y-%m-%d')}"
 $SOURCE = File.expand_path '~/Dropbox/Documents/rikaichan.txt'
 $DEST   = File.dirname(__FILE__) + '/rikaichan.output.txt'

@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+# Copyright: 2013 Paul Traylor
+# These sources are released under the terms of the MIT license: see LICENSE
 $TAGS   = "tags: Import Kotoba #{Time::now().strftime('%Y-%m-%d')}"
 $SOURCE = File.expand_path '~/Downloads/Favorites.txt'
 $DEST   = File.dirname(__FILE__) + '/kotoba.output.txt'
