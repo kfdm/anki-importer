@@ -5,7 +5,7 @@ $TAGS   = "tags: Import Kotoba #{Time::now().strftime('%Y-%m-%d')}"
 $SOURCE = File.expand_path '~/Downloads/Favorites.txt'
 $DEST   = File.dirname(__FILE__) + '/kotoba.output.txt'
 
-$input = File.new($SOURCE, "r")
+$input = File.new($SOURCE, "r:UTF-8")
 $output = File.new($DEST,'w')
 
 # Kotoba lines are of the form

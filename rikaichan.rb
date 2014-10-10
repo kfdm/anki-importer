@@ -5,7 +5,7 @@ $TAGS   = "tags: Import Rikaichan #{Time::now().strftime('%Y-%m-%d')}"
 $SOURCE = File.expand_path '~/Dropbox/Documents/rikaichan.txt'
 $DEST   = File.dirname(__FILE__) + '/rikaichan.output.txt'
 
-$input = File.new($SOURCE, "r")
+$input = File.new($SOURCE, "r:UTF-8")
 $output = File.new($DEST,'w')
 
 # Rikaichan lines are of the form
